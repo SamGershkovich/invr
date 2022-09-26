@@ -1,13 +1,4 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-100">
-    <body class="h-full">
-    ```
-  -->
   <div class="min-h-full">
     <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -16,7 +7,7 @@
             <div class="flex-shrink-0">
               <img
                 class="h-8 w-8"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src="http://127.0.0.1:5173/logistics.png"
                 alt="Your Company"
               />
             </div>
@@ -40,25 +31,6 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
-              <button
-                type="button"
-                class="
-                  rounded-full
-                  bg-gray-800
-                  p-1
-                  text-gray-400
-                  hover:text-white
-                  focus:outline-none
-                  focus:ring-2
-                  focus:ring-white
-                  focus:ring-offset-2
-                  focus:ring-offset-gray-800
-                "
-              >
-                <span class="sr-only">View notifications</span>
-                <BellIcon class="h-6 w-6" aria-hidden="true" />
-              </button>
-
               <!-- Profile dropdown -->
               <Menu as="div" class="relative ml-3">
                 <div>
@@ -69,7 +41,7 @@
                       items-center
                       rounded-full
                       bg-gray-800
-                      text-sm
+                      text-sm text-white
                       focus:outline-none
                       focus:ring-2
                       focus:ring-white
@@ -77,12 +49,7 @@
                       focus:ring-offset-gray-800
                     "
                   >
-                    <span class="sr-only">Open user menu</span>
-                    <img
-                      class="h-8 w-8 rounded-full"
-                      :src="user.imageUrl"
-                      alt=""
-                    />
+                    {{ user.name }}
                   </MenuButton>
                 </div>
                 <transition
@@ -109,19 +76,38 @@
                       focus:outline-none
                     "
                   >
-                    <MenuItem
-                      v-for="item in userNavigation"
-                      :key="item.name"
-                      v-slot="{ active }"
-                    >
+                    <MenuItem v-slot="{ active }">
                       <a
-                        :href="item.href"
+                        href="#"
                         :class="[
                           active ? 'bg-gray-100' : '',
                           'block px-4 py-2 text-sm text-gray-700',
                         ]"
-                        >{{ item.name }}</a
                       >
+                        Your Profile
+                      </a>
+                    </MenuItem>
+                    <MenuItem v-slot="{ active }">
+                      <a
+                        href="#"
+                        :class="[
+                          active ? 'bg-gray-100' : '',
+                          'block px-4 py-2 text-sm text-gray-700',
+                        ]"
+                      >
+                        Settings
+                      </a>
+                    </MenuItem>
+                    <MenuItem v-slot="{ active }" @click="logout">
+                      <a
+                        href="#"
+                        :class="[
+                          active ? 'bg-gray-100' : '',
+                          'block px-4 py-2 text-sm text-gray-700',
+                        ]"
+                      >
+                        Log out
+                      </a>
                     </MenuItem>
                   </MenuItems>
                 </transition>
@@ -178,9 +164,6 @@
         </div>
         <div class="border-t border-gray-700 pt-4 pb-3">
           <div class="flex items-center px-5">
-            <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
-            </div>
             <div class="ml-3">
               <div class="text-base font-medium leading-none text-white">
                 {{ user.name }}
@@ -189,33 +172,11 @@
                 {{ user.email }}
               </div>
             </div>
-            <button
-              type="button"
-              class="
-                ml-auto
-                flex-shrink-0
-                rounded-full
-                bg-gray-800
-                p-1
-                text-gray-400
-                hover:text-white
-                focus:outline-none
-                focus:ring-2
-                focus:ring-white
-                focus:ring-offset-2
-                focus:ring-offset-gray-800
-              "
-            >
-              <span class="sr-only">View notifications</span>
-              <BellIcon class="h-6 w-6" aria-hidden="true" />
-            </button>
           </div>
           <div class="mt-3 space-y-1 px-2">
             <DisclosureButton
-              v-for="item in userNavigation"
-              :key="item.name"
               as="a"
-              :href="item.href"
+              href="#"
               class="
                 block
                 rounded-md
@@ -226,8 +187,42 @@
                 text-gray-400
                 hover:bg-gray-700 hover:text-white
               "
-              >{{ item.name }}</DisclosureButton
             >
+              Your Profile
+            </DisclosureButton>
+            <DisclosureButton
+              as="a"
+              href="#"
+              class="
+                block
+                rounded-md
+                px-3
+                py-2
+                text-base
+                font-medium
+                text-gray-400
+                hover:bg-gray-700 hover:text-white
+              "
+            >
+              Settings
+            </DisclosureButton>
+            <DisclosureButton
+              as="a"
+              @click="logout"
+              href="#"
+              class="
+                block
+                rounded-md
+                px-3
+                py-2
+                text-base
+                font-medium
+                text-gray-400
+                hover:bg-gray-700 hover:text-white
+              "
+            >
+              Log out
+            </DisclosureButton>
           </div>
         </div>
       </DisclosurePanel>
@@ -237,7 +232,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import {
   Disclosure,
   DisclosureButton,
@@ -249,22 +244,47 @@ import {
 } from "@headlessui/vue";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+export default {
+  components: {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+    BellIcon,
+    Bars3Icon,
+    XMarkIcon,
+  },
+  data() {
+    return {};
+  },
+
+  computed: {
+    user() {
+      return this.$store.state.user.data;
+    },
+    navigation() {
+      if (this.user) {
+        if (this.user.role_id == 1) {
+          return [
+            { name: "Dashboard", href: "#", current: true },
+            { name: "Reports", href: "#", current: false },
+          ];
+        }
+      }
+      return [{ name: "Dashboard", href: "#", current: true }];
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push({
+          name: "Login",
+        });
+      });
+    },
+  },
 };
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
-];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
 </script>
