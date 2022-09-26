@@ -8,12 +8,14 @@
       </div>
     </header>
     <main class="h-full">
-      <div style="height: 500px;" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 h-full">
+      <div style="height: 500px" class="mx-auto max-w-7xl py-6 lg:px-8 h-full">
         <!-- Replace with your content -->
-        <div class="px-4 py-6 sm:px-0 grid grid-cols-4 gap-5 h-full">
-          <Comments />
+        <div
+          class="px-4 py-6 lg:grid lg:grid-cols-4 gap-5 h-full block relative"
+        >
+          <CommentsContainer />
           <Inventory class="col-span-2" />
-          <Messages />
+          <MessagesContainer />
         </div>
         <!-- /End replace -->
       </div>
@@ -32,9 +34,10 @@ import {
   MenuItems,
 } from "@headlessui/vue";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
-import Comments from "../components/Comments.vue";
-import Inventory from "../components/Inventory.vue";
-import Messages from "../components/Messages.vue";
+import Comments from "../components/Comments/Comments.vue";
+import Inventory from "../components/Inventory/Inventory.vue";
+import CommentsContainer from "../components/Comments/CommentsContainer.vue";
+import MessagesContainer from "../components/Messages/MessagesContainer.vue";
 
 export default {
   components: {
@@ -50,7 +53,8 @@ export default {
     XMarkIcon,
     Comments,
     Inventory,
-    Messages,
+    CommentsContainer,
+    MessagesContainer,
   },
   computed: {
     user() {
