@@ -17,9 +17,9 @@ class CreateInventoryTable extends Migration
             $table->id();
             $table->integer('updated_by');
             $table->integer('product_id');
-            $table->integer('inventory_date');
-            $table->decimal('front_quantity', 8, 2)->default(0);
-            $table->decimal('back_quantity', 8, 2)->default(0);
+            $table->timestamp('inventory_date')->default(now());
+            $table->decimal('front_quantity', 8, 2)->default(null)->nullable();
+            $table->decimal('back_quantity', 8, 2)->default(null)->nullable();
             $table->boolean('front_perpetual')->default(false);
             $table->boolean('back_perpetual')->default(false);
             $table->timestamps();

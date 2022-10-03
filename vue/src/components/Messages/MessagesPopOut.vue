@@ -19,9 +19,9 @@
               max-w-full
               pl-10
             ">
-              <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700"
+              <TransitionChild as="template" enter="transform transition ease-in-out duration-500"
                 enter-from="translate-x-full" enter-to="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0"
+                leave="transform transition ease-in-out duration-500" leave-from="translate-x-0"
                 leave-to="translate-x-full">
                 <DialogPanel class="pointer-events-auto relative w-screen max-w-md">
                   <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0"
@@ -76,12 +76,11 @@
       </Dialog>
     </TransitionRoot>
     <TransitionRoot as="template" :show="!open">
-      <TransitionChild as="template" enter="transform transition ease-in-out duration-700 sm:duration-900"
-        enter-from="translate-x-full" enter-to="translate-x-0"
-        leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0"
+      <TransitionChild as="template" enter="transform transition ease-in-out duration-700" enter-from="translate-x-full"
+        enter-to="translate-x-0" leave="transform transition ease-in-out duration-500" leave-from="translate-x-0"
         leave-to="translate-x-full">
-        <div style="border-right: none"
-          class="px-2 py-1 rounded absolute -right-1 -top-20 border shadow bg-white cursor-pointer"
+        <div style="border-right: none;  border-top-right-radius: 0; border-bottom-right-radius: 0;"
+          class="px-2 py-1 rounded absolute right-0 -top-20 border shadow bg-white cursor-pointer"
           @click="open = true;">
           ◄ Messages</div>
       </TransitionChild>

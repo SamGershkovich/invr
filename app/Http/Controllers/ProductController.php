@@ -3,66 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Exception;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+
+    public function search(Request $request)
     {
-        $products = Product::all();
-        return response()->json($products);
-    }
+        $input = $request->all();
+        $categories = json_decode($input['categories']);
+        $sub_categories = json_decode($input['sub_categories']);
+        //$country_of_origins = json_decode($input['country_of_origins']);
+
+        $products = [];
+
+        try {
+            $products = DB::table("products as p")
+                ->where(DB::raw('p.id'), '=', $input['id']);
+        } catch (Exception $e) {
+            $products = DB::table("products as p")
+                ->where(DB::raw('p.name'), 'like', '%' . $input['query'] . '%');
+        }
+
+        if (!empty($categories)) {
+            $products = $products->whereIn(DB::raw('p.category_id'), $categories);
+        }
+        if (!empty($sub_categories)) {
+            $products = $products->whereIn(DB::raw('p.sub_category_id'),  $sub_categories);
+        }
+        if (!empty($country_of_origins)) {
+            //->where(DB::raw('p.country_of_origin_id'), 'in', '(' . $country_of_origins . ')')
+        }
+
+        $products = $products->join('inventory as i', DB::raw('i.product_id'), "=", DB::raw('p.id'))->where(DB::raw('cast(i.inventory_date as date)'), '=', DB::raw('cast(now() as date)'));
+
+        $products = $products->join('categories as c', DB::raw('c.id'), "=", DB::raw('p.category_id'))
+            ->join('sub_categories as sc', DB::raw('sc.id'), "=", DB::raw('p.sub_category_id'))
+            ->select(
+                DB::raw('p.*'),
+                DB::raw('c.name as category_name'),
+                DB::raw('sc.name as sub_category_name'),
+                DB::raw('i.id as inventory_id'),
+                DB::raw('i.front_quantity as front_quantity'),
+                DB::raw('i.back_quantity as back_quantity'),
+                DB::raw('i.front_perpetual as front_perpetual'),
+                DB::raw('i.back_perpetual as back_perpetual'),
+            )->get();
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProductRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreProductRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
+        if (empty($products)) {
+            return $this->sendError('Products not found');
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
+        return response([
+            'products' => $products->toArray(),
+        ]);
     }
 }

@@ -1,7 +1,7 @@
 <template>
-  <div class="">
-    <Comments class="lg:block hidden" />
-    <CommentsPopOut class="lg:hidden block"/>
+  <div>
+    <Comments />
+    <CommentsPopOut />
   </div>
 </template>
 
@@ -16,7 +16,8 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() { 
+  },
   computed: {
     //1024px
     popOutMode() {
@@ -28,4 +29,5 @@ export default {
 </script>
 
 <style>
+
 </style>
