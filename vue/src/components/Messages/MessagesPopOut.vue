@@ -63,7 +63,21 @@
                     <div class="relative mt-6 flex-1 px-4 sm:px-6">
                       <!-- Replace with your content -->
                       <div class="absolute inset-0 px-4 sm:px-6">
-                        <div class="h-full border-2 border-dashed border-gray-200" aria-hidden="true" />
+
+                        <div
+                          class="overflow-y-auto relative bg-gray-100 border rounded shadow h-full p-3 pb-0 flex flex-col gap-3">
+
+                          <Message v-for="(message, index) in messages" :key="index" :data="message" />
+
+                          <div class="bg-gray-100 w-full bottom-0 sticky mt-5 py-3">
+                            <textarea ref="message" class="w-full"></textarea>
+                            <button @click="addMessage()"
+                              class="block ml-auto bg-blue-500 hover:bg-blue-400 text-white rounded px-3 py-1">Send
+                              Message</button>
+                          </div>
+
+                        </div>
+
                       </div>
                       <!-- /End replace -->
                     </div>
@@ -98,7 +112,7 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
-
+import Message from "./components/Message.vue";
 export default {
   components: {
     Dialog,
@@ -107,10 +121,31 @@ export default {
     TransitionChild,
     TransitionRoot,
     XMarkIcon,
+    Message,
   },
-  setup() {
-    const open = ref(false);
-    return { open };
+  data() {
+    return {
+      openPopout: false,
+    }
+  },
+  methods: {
+    addMessage() {
+      this.$store.dispatch('addMessage', { content: this.$refs.message.value });
+      this.$refs.message.value = "";
+    },
+  },
+  computed: {
+    messages() {
+      return this.$store.getters.messages
+    },
+    open: {
+      set(value) {
+        this.openPopout = value;
+      },
+      get() {
+        return this.openPopout;
+      },
+    }
   },
 }
 </script>

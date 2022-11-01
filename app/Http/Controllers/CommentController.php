@@ -24,7 +24,7 @@ class CommentController extends Controller
         $comments = $comments->join('users as u', DB::raw('u.id'), "=", DB::raw('c.user_id'))
             ->select(
                 DB::raw('c.*'),
-                DB::raw("TIME_FORMAT(c.created_at, '%r') as time"),
+                DB::raw("TIME_FORMAT(c.created_at, '%h:%i %p') as time"),
                 DB::raw('u.name as user_name'),
             )->get();
 
@@ -47,7 +47,7 @@ class CommentController extends Controller
         $comment = $comment->join('users as u', DB::raw('u.id'), "=", DB::raw('comments.user_id'))
             ->select(
                 DB::raw('comments.*'),
-                DB::raw("TIME_FORMAT(comments.created_at, '%r') as time"),
+                DB::raw("TIME_FORMAT(comments.created_at, '%h:%i %p') as time"),
                 DB::raw('u.name as user_name'),
             )->where('comments.id', '=', $id)->get();
 

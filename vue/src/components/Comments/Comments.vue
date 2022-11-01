@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 lg:block hidden border rounded shadow h-full p-3 pb-0 relative">
+  <div class="overflow-hidden bg-gray-100 lg:block hidden border rounded shadow h-full p-3 pb-0 relative">
     <div>
       <h2>Comments</h2>
       <div v-if="products.length> 0 "><b>{{products[productIndex].name}}</b></div>

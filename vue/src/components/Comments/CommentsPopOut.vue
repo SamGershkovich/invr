@@ -65,7 +65,8 @@
                       <!-- Replace with your content -->
                       <div class="absolute inset-0 px-4 sm:px-6">
 
-                        <div class="overflow-y-auto relative bg-gray-100 border rounded shadow h-full p-3 pb-0 flex flex-col gap-3">
+                        <div
+                          class="overflow-y-auto relative bg-gray-100 border rounded shadow h-full p-3 pb-0 flex flex-col gap-3">
 
                           <Comment v-for="(comment, index) in comments" :key="index" :data="comment" />
 

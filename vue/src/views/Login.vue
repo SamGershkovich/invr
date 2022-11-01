@@ -3,7 +3,7 @@
     <div>
       <img
         class="mx-auto h-12 w-auto"
-        src="http://127.0.0.1:5173/logistics.png"
+        src="http://localhost:5173/logistics.png"
         alt="Your Company"
       />
       <h2

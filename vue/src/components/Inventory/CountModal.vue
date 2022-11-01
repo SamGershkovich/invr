@@ -1,5 +1,5 @@
 <template>
-    <Modal :showModal="show" @save="inventory => save(inventory)" @close="$store.commit('setShowEditModal', false)">
+    <Modal :showModal="show" @save="inventory => save(inventory)" @close="$store.commit('setShowCountModal', false)">
         <template v-slot:title>
             <div>Inventory for</div>
             <div><b>{{products[productIndex].name}}</b></div>
@@ -87,7 +87,7 @@ export default {
             }
         },
         show() {
-            return this.$store.getters.showEditModal;
+            return this.$store.getters.showCountModal;
         },
         products() {
             return this.$store.getters.products;
@@ -192,7 +192,7 @@ export default {
             if (!this.validateInput(back_partial, false, true)) return;
 
 
-            this.$store.commit('setShowEditModal', false);
+            this.$store.commit('setShowCountModal', false);
 
             if (front_cases)
                 front_cases = parseInt(front_cases);

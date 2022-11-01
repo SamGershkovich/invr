@@ -38,6 +38,7 @@ class ProductController extends Controller
         }
 
         $products = $products->join('inventory as i', DB::raw('i.product_id'), "=", DB::raw('p.id'))->where(DB::raw('cast(i.inventory_date as date)'), '=', DB::raw('cast(now() as date)'));
+        $products = $products->join('shrink as s', DB::raw('s.inventory_id'), "=", DB::raw('i.id'));
 
         $products = $products->join('categories as c', DB::raw('c.id'), "=", DB::raw('p.category_id'))
             ->join('sub_categories as sc', DB::raw('sc.id'), "=", DB::raw('p.sub_category_id'))
@@ -50,6 +51,8 @@ class ProductController extends Controller
                 DB::raw('i.back_quantity as back_quantity'),
                 DB::raw('i.front_perpetual as front_perpetual'),
                 DB::raw('i.back_perpetual as back_perpetual'),
+                DB::raw('s.quantity as shrink'),
+                DB::raw('s.id as shrink_id'),
             )->get();
 
 

@@ -13,12 +13,15 @@ const store = createStore({
         country_of_origins: [],
         productIndex: 0,
         showFilterModal: false,
-        showEditModal: false,
+        showCountModal: false,
+        showShrinkModal: false,
         comments: [],
+        messages: [],
     },
     getters: {
         showFilterModal: state => state.showFilterModal,
-        showEditModal: state => state.showEditModal,
+        showCountModal: state => state.showCountModal,
+        showShrinkModal: state => state.showShrinkModal,
         productIndex: state => state.productIndex,
         getUser: state => state.user,
         products: state => state.products,
@@ -26,8 +29,15 @@ const store = createStore({
         sub_categories: state => state.sub_categories,
         country_of_origins: state => state.country_of_origins,
         comments: state => state.comments,
+        messages: state => state.messages,
     },
     mutations: {
+        setMessages(state, messages) {
+            state.messages = messages;
+        },
+        addMessage(state, message) {
+            state.messages.push(message);
+        },
         setComments(state, comments) {
             state.comments = comments;
         },
@@ -60,8 +70,11 @@ const store = createStore({
         setShowFilterModal(state, payload) {
             state.showFilterModal = payload;
         },
-        setShowEditModal(state, payload) {
-            state.showEditModal = payload;
+        setShowCountModal(state, payload) {
+            state.showCountModal = payload;
+        },
+        setShowShrinkModal(state, payload) {
+            state.showShrinkModal = payload;
         },
         setProductIndex(state, index) {
             state.productIndex = index;
@@ -86,6 +99,23 @@ const store = createStore({
         }
     },
     actions: {
+        getMessages({ commit, state }) {
+            axiosClient.get(`/messages`)
+                .then(res => {
+                    commit('setMessages', res.data.messages);
+                    return res.data.messages;
+                })
+        },
+        addMessage({ commit, state }, content) {
+            if (content.content.trim() == '') return;
+            axiosClient.post(`/addMessage`, {
+                user_id: state.user.data.id,
+                content: content.content
+            }
+            ).then(res => {
+                commit('addMessage', res.data.messages[0]);
+            })
+        },
         getComments({ commit, state }) {
             axiosClient.get(`/comments`, { params: { inventory_id: state.products[state.productIndex].inventory_id } })
                 .then(res => {
@@ -105,15 +135,22 @@ const store = createStore({
                 commit('addComment', res.data.comments[0]);
             })
         },
+        saveShrink({ dispatch, commit }, shrink) {
+            return axiosClient.post('/shrink/update', shrink).then(response => {
+                dispatch('searchProducts', { id: shrink.id });
+                return response;
+            });
+        },
         saveInventory({ dispatch, commit }, inventory) {
             return axiosClient.post('/inventory/update', inventory).then(response => {
                 dispatch('searchProducts', { id: inventory.id });
                 return response;
             });
         },
-        login({ commit }, user) {
+        login({ commit, dispatch }, user) {
             return axiosClient.post('/login', user).then(response => {
                 commit('setUser', response);
+                dispatch('getMessages');
                 return response;
             });
         },
@@ -165,7 +202,7 @@ const store = createStore({
                     return response.data.products;
                 });
             }
-        }
+        },
     },
     modules: {}
 })

@@ -15,7 +15,7 @@
         Filters
       </button>
       <div class="relative mx-auto text-gray-600 col-span-2">
-        <input class="
+        <input class="w-full
             border-2 border-gray-300
             bg-white
             h-full
@@ -74,7 +74,7 @@
         </div>
 
 
-        <button @click="$store.commit('setShowEditModal', true)" style="width: fit-content" class="
+        <button @click="$store.commit('setShowCountModal', true)" style="width: fit-content" class="
           mt-10
           bg-white
           hover:bg-gray-100
@@ -86,9 +86,22 @@
           rounded
           shadow
         ">
-
-
-          Edit
+          Count
+        </button>
+        <button @click="$store.commit('setShowShrinkModal', true)" style="width: fit-content" class="
+          mt-10
+          bg-white
+          hover:bg-gray-100
+          text-gray-800
+          font-semibold
+          py-2
+          px-3
+          border border-gray-400
+          rounded
+          shadow
+          ml-5
+        ">
+          Shrink
         </button>
       </div>
       <div class="cursor-pointer contents" @click="nextProduct()">
@@ -96,7 +109,8 @@
       </div>
     </div>
     <FilterModal />
-    <EditModal />
+    <CountModal />
+    <ShrinkModal />
   </div>
 </template>
 
@@ -107,10 +121,11 @@ import {
 } from "@heroicons/vue/24/outline";
 
 import FilterModal from "./FilterModal.vue";
-import EditModal from "./EditModal.vue";
+import CountModal from "./CountModal.vue";
+import ShrinkModal from "./ShrinkModal.vue";
 export default {
   name: "Inventory",
-  components: { ArrowLeftCircleIcon, ArrowRightCircleIcon, FilterModal, EditModal },
+  components: { ArrowLeftCircleIcon, ArrowRightCircleIcon, FilterModal, CountModal, ShrinkModal },
   props: {},
   data() {
     return {

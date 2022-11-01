@@ -5,27 +5,16 @@
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <img
-                class="h-8 w-8"
-                src="http://127.0.0.1:5173/logistics.png"
-                alt="Your Company"
-              />
+              <img class="h-8 w-8" src="http://localhost:5173/logistics.png" alt="Your Company" />
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                <a
-                  v-for="item in navigation"
-                  :key="item.name"
-                  :href="item.href"
-                  :class="[
-                    item.current
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'px-3 py-2 rounded-md text-sm font-medium',
-                  ]"
-                  :aria-current="item.current ? 'page' : undefined"
-                  >{{ item.name }}</a
-                >
+                <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[
+                  item.current
+                    ? 'bg-gray-900 text-white'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  'px-3 py-2 rounded-md text-sm font-medium',
+                ]" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
               </div>
             </div>
           </div>
@@ -34,8 +23,7 @@
               <!-- Profile dropdown -->
               <Menu as="div" class="relative ml-3">
                 <div>
-                  <MenuButton
-                    class="
+                  <MenuButton class="
                       flex
                       max-w-xs
                       items-center
@@ -47,21 +35,15 @@
                       focus:ring-white
                       focus:ring-offset-2
                       focus:ring-offset-gray-800
-                    "
-                  >
+                    ">
                     {{ user.name }}
                   </MenuButton>
                 </div>
-                <transition
-                  enter-active-class="transition ease-out duration-100"
-                  enter-from-class="transform opacity-0 scale-95"
-                  enter-to-class="transform opacity-100 scale-100"
-                  leave-active-class="transition ease-in duration-75"
-                  leave-from-class="transform opacity-100 scale-100"
-                  leave-to-class="transform opacity-0 scale-95"
-                >
-                  <MenuItems
-                    class="
+                <transition enter-active-class="transition ease-out duration-100"
+                  enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+                  leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
+                  leave-to-class="transform opacity-0 scale-95">
+                  <MenuItems class="
                       absolute
                       right-0
                       z-10
@@ -74,40 +56,30 @@
                       shadow-lg
                       ring-1 ring-black ring-opacity-5
                       focus:outline-none
-                    "
-                  >
+                    ">
                     <MenuItem v-slot="{ active }">
-                      <a
-                        href="#"
-                        :class="[
-                          active ? 'bg-gray-100' : '',
-                          'block px-4 py-2 text-sm text-gray-700',
-                        ]"
-                      >
-                        Your Profile
-                      </a>
+                    <a href="#" :class="[
+                      active ? 'bg-gray-100' : '',
+                      'block px-4 py-2 text-sm text-gray-700',
+                    ]">
+                      Your Profile
+                    </a>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
-                      <a
-                        href="#"
-                        :class="[
-                          active ? 'bg-gray-100' : '',
-                          'block px-4 py-2 text-sm text-gray-700',
-                        ]"
-                      >
-                        Settings
-                      </a>
+                    <a href="#" :class="[
+                      active ? 'bg-gray-100' : '',
+                      'block px-4 py-2 text-sm text-gray-700',
+                    ]">
+                      Settings
+                    </a>
                     </MenuItem>
                     <MenuItem v-slot="{ active }" @click="logout">
-                      <a
-                        href="#"
-                        :class="[
-                          active ? 'bg-gray-100' : '',
-                          'block px-4 py-2 text-sm text-gray-700',
-                        ]"
-                      >
-                        Log out
-                      </a>
+                    <a href="#" :class="[
+                      active ? 'bg-gray-100' : '',
+                      'block px-4 py-2 text-sm text-gray-700',
+                    ]">
+                      Log out
+                    </a>
                     </MenuItem>
                   </MenuItems>
                 </transition>
@@ -116,8 +88,7 @@
           </div>
           <div class="-mr-2 flex md:hidden">
             <!-- Mobile menu button -->
-            <DisclosureButton
-              class="
+            <DisclosureButton class="
                 inline-flex
                 items-center
                 justify-center
@@ -131,14 +102,9 @@
                 focus:ring-white
                 focus:ring-offset-2
                 focus:ring-offset-gray-800
-              "
-            >
+              ">
               <span class="sr-only">Open main menu</span>
-              <Bars3Icon
-                v-if="!open"
-                class="block h-6 w-6"
-                aria-hidden="true"
-              />
+              <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
               <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
             </DisclosureButton>
           </div>
@@ -147,20 +113,12 @@
 
       <DisclosurePanel class="md:hidden">
         <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-          <DisclosureButton
-            v-for="item in navigation"
-            :key="item.name"
-            as="a"
-            :href="item.href"
-            :class="[
-              item.current
-                ? 'bg-gray-900 text-white'
-                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-              'block px-3 py-2 rounded-md text-base font-medium',
-            ]"
-            :aria-current="item.current ? 'page' : undefined"
-            >{{ item.name }}</DisclosureButton
-          >
+          <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[
+            item.current
+              ? 'bg-gray-900 text-white'
+              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+            'block px-3 py-2 rounded-md text-base font-medium',
+          ]" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
         </div>
         <div class="border-t border-gray-700 pt-4 pb-3">
           <div class="flex items-center px-5">
@@ -174,10 +132,7 @@
             </div>
           </div>
           <div class="mt-3 space-y-1 px-2">
-            <DisclosureButton
-              as="a"
-              href="#"
-              class="
+            <DisclosureButton as="a" href="#" class="
                 block
                 rounded-md
                 px-3
@@ -186,14 +141,10 @@
                 font-medium
                 text-gray-400
                 hover:bg-gray-700 hover:text-white
-              "
-            >
+              ">
               Your Profile
             </DisclosureButton>
-            <DisclosureButton
-              as="a"
-              href="#"
-              class="
+            <DisclosureButton as="a" href="#" class="
                 block
                 rounded-md
                 px-3
@@ -202,15 +153,10 @@
                 font-medium
                 text-gray-400
                 hover:bg-gray-700 hover:text-white
-              "
-            >
+              ">
               Settings
             </DisclosureButton>
-            <DisclosureButton
-              as="a"
-              @click="logout"
-              href="#"
-              class="
+            <DisclosureButton as="a" @click="logout" href="#" class="
                 block
                 rounded-md
                 px-3
@@ -219,8 +165,7 @@
                 font-medium
                 text-gray-400
                 hover:bg-gray-700 hover:text-white
-              "
-            >
+              ">
               Log out
             </DisclosureButton>
           </div>
@@ -269,8 +214,8 @@ export default {
       if (this.user) {
         if (this.user.role_id == 1) {
           return [
-            { name: "Dashboard", href: "#", current: true },
-            { name: "Reports", href: "#", current: false },
+            { name: "Dashboard", href: "/dashboard", current: window.location.pathname == "/dashboard" },
+            { name: "Reports", href: "/reports", current: window.location.pathname == "/reports" },
           ];
         }
       }

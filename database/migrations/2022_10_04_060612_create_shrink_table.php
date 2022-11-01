@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateShrinkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('shrink', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('content', 2000);
-            $table->boolean('deleted')->default(0);
-            $table->boolean('edited')->default(0);
+            $table->integer('updated_by');
+            $table->integer('inventory_id');
+            $table->decimal('quantity', 8, 2)->default(null)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('shrink');
     }
 }

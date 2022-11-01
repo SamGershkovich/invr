@@ -2,20 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class Shrink extends Model
 {
-    public $table = 'messages';
+    public $table = 'shrink';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
     public $fillable = [
-        'user_id',
-        'content',
-        'deleted',
-        'edited',
+        'updated_by',
+        'product_id',
+        'inventory_id',
+        'quantity',
     ];
 
     /**
@@ -24,10 +25,10 @@ class Message extends Model
      * @var array
      */
     protected $casts = [
-        'user_id' => 'integer',
-        'content' => 'string',
-        'deleted' => 'boolean',
-        'edited' => 'boolean',
+        'updated_by' => 'integer',
+        'product_id' => 'integer',
+        'inventory_id' => 'integer',
+        'quantity' => 'decimal:2',
     ];
 
     /**
