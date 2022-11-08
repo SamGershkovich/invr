@@ -27,6 +27,10 @@ createApp(App)
 let user_data = sessionStorage.getItem('user_data');
 let token = sessionStorage.getItem('TOKEN');
 
+setData();
+
+async function setData(){
+
 if (user_data && token) {
     store.commit('setUser', { data: { user: JSON.parse(user_data), token: JSON.parse(token) } });
 
@@ -36,4 +40,5 @@ if (user_data && token) {
         console.log(message.detail)
         store.commit('addMessage', message.detail);
     })
+}
 }
