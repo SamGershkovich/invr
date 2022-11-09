@@ -8,7 +8,7 @@ import store from "../store";
 const routes = [
     {
         path: '/',
-        redirect: "/dashboard",
+        redirect: '/dashboard',
         name: 'Dashboard',
         meta: { requiresAuth: true },
         component: DefaultLayout,
@@ -41,10 +41,9 @@ const routes = [
 
 ];
 
-
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 })
 
 router.beforeEach((to, from, next) => {
