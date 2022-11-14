@@ -35,7 +35,7 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token
         ]);
-/*
+    /*
         $input = $request->all();
         $message = Message::create($input);
 

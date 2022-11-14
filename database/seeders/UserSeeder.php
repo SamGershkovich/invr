@@ -14,13 +14,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        /*DB::table('users')->insert([
             'name' => "Sharron Scollard",
             'role_id' => 1,
             'employee_number' => 11111,
             'password' => '$2y$10$xeqDYObRLb22EwBH7G7i5eBasgKFpABCkNlDqwcVi88VvajMlvTZe',
             'remember_token' => NULL,
-        ]);         
+        ]);   */      
         // DB::table('users')->insert([
         //     'name' => "Sam Gershkovich",
         //     'role_id' => 2,
