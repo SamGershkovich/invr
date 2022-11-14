@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from "../views/Dashboard.vue";
-import Reports from "../views/Reports.vue";
-import Login from "../views/Login.vue";
+import invrDashboard from "../views/invrDashboard.vue";
+import invrReports from "../views/invrReports.vue";
+import invrLogin from "../views/invrLogin.vue";
 import DefaultLayout from "../components/DefaultLayout.vue";
 import AuthLayout from "../components/AuthLayout.vue";
 import store from "../store";
@@ -16,12 +16,12 @@ const routes = [
             {
                 path: '/dashboard',
                 name: 'Dashboard',
-                component: Dashboard,
+                component: invrDashboard,
             },
             {
                 path: '/reports',
                 name: 'Reports',
-                component: Reports,
+                component: invrReports,
             }],
     },
     {
@@ -34,7 +34,7 @@ const routes = [
             {
                 path: '/login',
                 name: 'Login',
-                component: Login
+                component: invrLogin
             }
         ]
     }

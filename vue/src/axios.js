@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from './store'
 
 const axiosClient = axios.create({
-    baseURL: import.meta.env.VITE_MIX_API_URL
+    baseURL: process.env.VUE_APP_API_URL
 })
 
 

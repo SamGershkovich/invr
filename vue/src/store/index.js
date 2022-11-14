@@ -99,7 +99,7 @@ const store = createStore({
         }
     },
     actions: {
-        getMessages({ commit, state }) {
+        getMessages({ commit }) {
             axiosClient.get(`/messages`)
                 .then(res => {
                     commit('setMessages', res.data.messages);
@@ -136,13 +136,13 @@ const store = createStore({
                 commit('addComment', res.data.comments[0]);
             })
         },
-        saveShrink({ dispatch, commit }, shrink) {
+        saveShrink({ dispatch }, shrink) {
             return axiosClient.post('/shrink/update', shrink).then(response => {
                 dispatch('searchProducts', { id: shrink.id });
                 return response;
             });
         },
-        saveInventory({ dispatch, commit }, inventory) {
+        saveInventory({ dispatch }, inventory) {
             return axiosClient.post('/inventory/update', inventory).then(response => {
                 dispatch('searchProducts', { id: inventory.id });
                 return response;

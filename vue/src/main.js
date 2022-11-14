@@ -8,8 +8,8 @@ import App from './App.vue'
 import Pusher from 'pusher-js';
 
 
-var pusher = new Pusher(import.meta.env.VITE_MIX_PUSHER_APP_KEY, {
-    cluster: import.meta.env.VITE_MIX_PUSHER_APP_CLUSTER
+var pusher = new Pusher(process.env.VUE_APP_PUSHER_APP_KEY, {
+    cluster: process.env.VUE_APP_PUSHER_APP_CLUSTER
 });
 
 var channel = pusher.subscribe('chat');
@@ -29,16 +29,16 @@ let token = sessionStorage.getItem('TOKEN');
 
 setData();
 
-async function setData(){
+async function setData() {
 
-if (user_data && token) {
-    store.commit('setUser', { data: { user: JSON.parse(user_data), token: JSON.parse(token) } });
+    if (user_data && token) {
+        store.commit('setUser', { data: { user: JSON.parse(user_data), token: JSON.parse(token) } });
 
-    await store.dispatch('getMessages');
+        await store.dispatch('getMessages');
 
-    window.addEventListener('newMessage', (message) => {
-        console.log(message.detail)
-        store.commit('addMessage', message.detail);
-    })
-}
+        window.addEventListener('newMessage', (message) => {
+            console.log(message.detail)
+            store.commit('addMessage', message.detail);
+        })
+    }
 }
