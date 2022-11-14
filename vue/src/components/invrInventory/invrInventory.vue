@@ -41,7 +41,7 @@
       </button>
     </div>
     <div>
-      <div class="my-3" v-if="products.length > 0">{{productIndex + 1 + "/" + products.length}}</div>
+      <div class="my-3" v-if="products.length > 0">{{ productIndex + 1 + "/" + products.length }}</div>
       <div v-else>No Products Found</div>
     </div>
     <div v-if="products.length > 0" style="justify-items: center;" class="row-span-5 grid grid-cols-7">
@@ -50,27 +50,29 @@
       </div>
       <div class="col-span-5">
 
-        <div> <span class="inline-block text-xl font-bold">{{products[productIndex].name}}</span>
+        <div> <span class="inline-block text-xl font-bold">{{ products[productIndex].name }}</span>
           <span
             class="ml-3 rounded-full border border-black text-black w-5 h-5 inline-grid content-center cursor-pointer font-bold">i</span>
         </div>
 
-        <div class="text-sm mb-7">{{products[productIndex].category_name}} &rarr;
-          {{products[productIndex].sub_category_name}}</div>
+        <div class="text-sm mb-7">{{ products[productIndex].category_name }} &rarr;
+          {{ products[productIndex].sub_category_name }}</div>
 
         <div class="grid grid-flow-col grid-cols-2">
           <span>Front qty: </span>
-          <span class="text-xl font-bold">{{products[productIndex].front_perpetual ? 'P' :
-          (products[productIndex].front_quantity ?
-          products[productIndex].front_quantity : '-')}}
+          <span class="text-xl font-bold">{{ products[productIndex].front_perpetual ? 'P' :
+              (products[productIndex].front_quantity ?
+                products[productIndex].front_quantity : '-')
+          }}
           </span>
         </div>
 
         <div class="mt-2 grid grid-flow-col grid-cols-2">
           <span>Back qty: </span>
-          <span class="text-xl font-bold">{{products[productIndex].back_perpetual ? 'P' :
-          (products[productIndex].back_quantity ?
-          products[productIndex].back_quantity : '-' )}}</span>
+          <span class="text-xl font-bold">{{ products[productIndex].back_perpetual ? 'P' :
+              (products[productIndex].back_quantity ?
+                products[productIndex].back_quantity : '-')
+          }}</span>
         </div>
 
 
@@ -107,6 +109,9 @@
       <div class="cursor-pointer contents" @click="nextProduct()">
         <ArrowRightCircleIcon class="w-10" />
       </div>
+    </div>
+    <div v-else class="row-span-5">
+
     </div>
     <FilterModal />
     <CountModal />

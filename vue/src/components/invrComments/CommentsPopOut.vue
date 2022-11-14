@@ -61,7 +61,7 @@
                       <DialogTitle class="text-lg font-medium text-gray-900">Comments</DialogTitle>
                       <div v-if="products.length > 0">{{products[productIndex].name}}</div>
                     </div>
-                    <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                    <div  v-if="products.length > 0" class="relative mt-6 flex-1 px-4 sm:px-6">
                       <!-- Replace with your content -->
                       <div class="absolute inset-0 px-4 sm:px-6">
 

@@ -5,7 +5,7 @@
       <div v-if="products.length> 0 "><b>{{products[productIndex].name}}</b></div>
     </div>
 
-    <div style="max-height: 500px;" class="overflow-y-auto relative bg-gray-100 h-full p-3 pb-0 flex flex-col gap-3">
+    <div v-if="products.length > 0" style="max-height: 500px;" class="overflow-y-auto relative bg-gray-100 h-full p-3 pb-0 flex flex-col gap-3">
 
       <Comment v-for="(comment, index) in comments" :key="index" :data="comment" />
 
