@@ -42,9 +42,8 @@ const routes = [
 ];
 
 const router = createRouter({
-    //history: createWebHistory(),
+    history: createWebHistory(),
     routes,
-    mode: "hash",
 })
 
 router.beforeEach((to, from, next) => {
