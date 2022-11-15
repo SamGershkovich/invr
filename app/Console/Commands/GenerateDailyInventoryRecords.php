@@ -43,18 +43,20 @@ class GenerateDailyInventoryRecords extends Command
      */
     public function handle()
     {
-      $products =  Product::all()->random(100);
+      for($i = 0; $i < 30; $i++) {
+        $products =  Product::all()->random(100);
       foreach($products as $product){
         $inv_record = Inventory::create([
           'product_id' => $product->id,
-          'inventory_date' => Carbon::now(),
+          'inventory_date' => Carbon::now()->addDays($i),
           'updated_by' => 0,
         ]);
-        //Log::debug(['inv record' => $inv_record->id]);
         Shrink::create([
             'inventory_id' => $inv_record->id,
             'updated_by' => 0,
         ]);
       }
+      }
+      
     }
 }
