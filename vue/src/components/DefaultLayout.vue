@@ -172,7 +172,7 @@ export default {
     },
     navigation() {
       if (this.user) {
-        if (this.user.role_id == 1) {
+        if (this.user.role_id < 3) {
           return [
             { name: "Dashboard", href: "/dashboard", current: window.location.pathname == "/dashboard" },
             { name: "Reports", href: "/reports", current: window.location.pathname == "/reports" },
