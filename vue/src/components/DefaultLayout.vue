@@ -57,22 +57,7 @@
                       ring-1 ring-black ring-opacity-5
                       focus:outline-none
                     ">
-                    <MenuItem v-slot="{ active }">
-                    <a href="#" :class="[
-                      active ? 'bg-gray-100' : '',
-                      'block px-4 py-2 text-sm text-gray-700',
-                    ]">
-                      Your Profile
-                    </a>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                    <a href="#" :class="[
-                      active ? 'bg-gray-100' : '',
-                      'block px-4 py-2 text-sm text-gray-700',
-                    ]">
-                      Settings
-                    </a>
-                    </MenuItem>
+
                     <MenuItem v-slot="{ active }" @click="logout">
                     <a href="#" :class="[
                       active ? 'bg-gray-100' : '',
@@ -132,30 +117,6 @@
             </div>
           </div>
           <div class="mt-3 space-y-1 px-2">
-            <DisclosureButton as="a" href="#" class="
-                block
-                rounded-md
-                px-3
-                py-2
-                text-base
-                font-medium
-                text-gray-400
-                hover:bg-gray-700 hover:text-white
-              ">
-              Your Profile
-            </DisclosureButton>
-            <DisclosureButton as="a" href="#" class="
-                block
-                rounded-md
-                px-3
-                py-2
-                text-base
-                font-medium
-                text-gray-400
-                hover:bg-gray-700 hover:text-white
-              ">
-              Settings
-            </DisclosureButton>
             <DisclosureButton as="a" @click="logout" href="#" class="
                 block
                 rounded-md
