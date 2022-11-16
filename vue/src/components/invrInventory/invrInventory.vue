@@ -23,7 +23,7 @@
             rounded-lg
             text-sm
             focus:outline-none
-          " type="search" name="search" ref="search" placeholder="Search products" />
+          " type="search" name="search" ref="search" placeholder="Search products" autocomplete="off"/>
       </div>
       <button @click="search()" style="width: fit-content" class="
           bg-white
